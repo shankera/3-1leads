@@ -1,82 +1,81 @@
-$(document).ready(function(){
+$(document).ready(function() {
     $.ajax({
-      url: "http://www.3-1leads.com/seasons.txt",
-      success: function(data){
-          var rows = data.split('\n');
-          for (var link of rows){
-              if (link == "") return;
-              var splitLink = link.split('|');
-              var topLevel = splitLink[0]
-              var sidebar = document.getElementById("somethingObvious");
-              var element = document.createElement('li');
-              var test = document.createElement('a');
-              test.textContent = topLevel;
-              test.setAttribute('class','notlink');
-              element.appendChild(test)
-              var div = document.createElement('div');
-              splitLink.shift()
-              var subList = document.createElement('ul');
-              subList.setAttribute('class','nav nav-sidebar');//nav-sidebar-secondary ');
-              for (var item of splitLink){
-                  var splitItem = item.split(',');
-                  var listItem = document.createElement('li');
-                  var listLink = document.createElement('a');
-                  listLink.textContent = splitItem[0];
-                  listLink.setAttribute('onClick', 'refreshTable(\"'+splitItem[1]+'\")');
-                  listItem.appendChild(listLink);
-                  subList.appendChild(listItem);
-              }
-              div.appendChild(subList);
-            //   element.appendChild(link);
-              sidebar.appendChild(element);
-              sidebar.appendChild(div);
-          }
-      }
+        url: "http://www.3-1leads.com/seasons.txt",
+        success: function(data) {
+            var rows = data.split('\n');
+            for (var link of rows) {
+                if (link == "") return;
+                var splitLink = link.split('|');
+                var topLevel = splitLink[0]
+                var sidebar = document.getElementById("somethingObvious");
+                var element = document.createElement('li');
+                var test = document.createElement('a');
+                test.textContent = topLevel;
+                test.setAttribute('class', 'notlink');
+                element.appendChild(test)
+                var div = document.createElement('div');
+                splitLink.shift()
+                var subList = document.createElement('ul');
+                subList.setAttribute('class', 'nav nav-sidebar');
+                for (var item of splitLink) {
+                    var splitItem = item.split(',');
+                    var listItem = document.createElement('li');
+                    var listLink = document.createElement('a');
+                    listLink.textContent = splitItem[0];
+                    listLink.setAttribute('onClick', 'refreshTable(\"' + splitItem[1] + '\")');
+                    listItem.appendChild(listLink);
+                    subList.appendChild(listItem);
+                }
+                div.appendChild(subList);
+                sidebar.appendChild(element);
+                sidebar.appendChild(div);
+            }
+        }
     });
 });
 
-var refreshTable = function(value){
+var refreshTable = function(value) {
     $.get(value)
-    .done(function(response) {
-        var contentDiv = document.getElementById('content');
-        contentDiv.innerHTML = "";
-         var allData = response.split('\n')
-         var season = new Array;
-         for(var item of allData){
-             item = item.split(" ")
-             if(item[0] == "" || item[0] == undefined){
+        .done(function(response) {
+            var contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = "";
+            var allData = response.split('\n')
+            var season = new Array;
+            for (var item of allData) {
+                item = item.split(" ")
+                if (item[0] == "" || item[0] == undefined) {
 
-             } else if (item.length == 1){
-                 var subSeason = new Array;
-                 subSeason.push(item[0].replace(/-/g, ""));
-                 season.push(subSeason);
-             } else if (item.length == 2){
-                 var subSeason = new Array;
-                 subSeason.push((item[0] + " " + item[1]).replace(/-/g, ""));
-                 season.push(subSeason);
-             } else {
-                 var month = item[0].toLowerCase()
-                 month = month[0].toUpperCase() + month.slice(1)
-                 var result = new Result(month + " " + item[1] + " " + item[2],
-                 item[3],
-                 item[4],
-                 item[5],
-                 item[6]);
-                 season[season.length-1].push(result);
-             }
-         }
+                } else if (item.length == 1) {
+                    var subSeason = new Array;
+                    subSeason.push(item[0].replace(/-/g, ""));
+                    season.push(subSeason);
+                } else if (item.length == 2) {
+                    var subSeason = new Array;
+                    subSeason.push((item[0] + " " + item[1]).replace(/-/g, ""));
+                    season.push(subSeason);
+                } else {
+                    var month = item[0].toLowerCase()
+                    month = month[0].toUpperCase() + month.slice(1)
+                    var result = new Result(month + " " + item[1] + " " + item[2],
+                        item[3],
+                        item[4],
+                        item[5],
+                        item[6]);
+                    season[season.length - 1].push(result);
+                }
+            }
 
-         for (var part of season){
-             var header = document.createElement('h3');
-             header.textContent = part[0]
-             content.appendChild(header)
-             part.shift()
-             createTable(part, content)
-         }
-    })
+            for (var part of season) {
+                var header = document.createElement('h3');
+                header.textContent = part[0]
+                content.appendChild(header)
+                part.shift()
+                createTable(part, content)
+            }
+        })
 };
 
-var createTable = function(data, content){
+var createTable = function(data, content) {
     var table = document.createElement('table');
     // table.setAttribute('cellspacing', '10')
     var tableHeader = document.createElement('tr');
@@ -96,7 +95,7 @@ var createTable = function(data, content){
     tableHeader.append(ts);
     tableHeader.append(tt);
     table.appendChild(tableHeader);
-    for (result of data){
+    for (result of data) {
         var row = document.createElement('tr');
         var rd = document.createElement('td');
         rd.textContent = result.date;
@@ -123,7 +122,7 @@ var createTable = function(data, content){
     content.appendChild(table)
 }
 
-function Result(date, leadingTeam, result, score, trailingTeam){
+function Result(date, leadingTeam, result, score, trailingTeam) {
     this.date = date;
     this.leadingTeam = leadingTeam;
     this.result = result;
