@@ -1,1 +1,3 @@
-2016-17 Season|http://www.3-1leads.com/seasons/16-17.txt
+2016-17 Preseason|http://www.3-1leads.com/seasons/16-17/16-17Preseason.txt
+2016-17 Regular Season|http://www.3-1leads.com/seasons/16-17/16-17RegularSeason.txt
+2016-17 Postseason|http://www.3-1leads.com/seasons/16-17/16-17Postseason.txt
