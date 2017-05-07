@@ -6,14 +6,30 @@ $(document).ready(function(){
           for (var link of rows){
               if (link == "") return;
               var splitLink = link.split('|');
+              var topLevel = splitLink[0]
               var sidebar = document.getElementById("somethingObvious");
               var element = document.createElement('li');
-              element.setAttribute('class','nav-sidebar-secondary ')
-              var link = document.createElement('a');
-              link.textContent = splitLink[0];
-              link.setAttribute('onClick', 'refreshTable(\"'+splitLink[1]+'\")');
-              element.appendChild(link);
+              var test = document.createElement('a');
+              test.textContent = topLevel;
+              test.setAttribute('class','notlink');
+              element.appendChild(test)
+              var div = document.createElement('div');
+              splitLink.shift()
+              var subList = document.createElement('ul');
+              subList.setAttribute('class','nav nav-sidebar');//nav-sidebar-secondary ');
+              for (var item of splitLink){
+                  var splitItem = item.split(',');
+                  var listItem = document.createElement('li');
+                  var listLink = document.createElement('a');
+                  listLink.textContent = splitItem[0];
+                  listLink.setAttribute('onClick', 'refreshTable(\"'+splitItem[1]+'\")');
+                  listItem.appendChild(listLink);
+                  subList.appendChild(listItem);
+              }
+              div.appendChild(subList);
+            //   element.appendChild(link);
               sidebar.appendChild(element);
+              sidebar.appendChild(div);
           }
       }
     });
