@@ -183,7 +183,7 @@ var createTable = function(data) {
         var row = document.createElement('tr');
         var rd = document.createElement('td');
         rd.textContent = result.date;
-        rd.setAttribute('align', 'right');
+        rd.setAttribute('align', 'left');
         var rl = document.createElement('td');
         rl.textContent = result.leadingTeam;
         rl.setAttribute('align', 'right');
