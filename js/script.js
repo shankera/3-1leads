@@ -133,13 +133,13 @@ var parseResponse = function(response) {
     for (var item of allData) {
         item = item.split(" ")
         if (item[0] == "" || item[0] == undefined) {
-        } else if (item.length == 1) {
-            var subSeason = new Array;
-            subSeason.push(item[0].replace(/-/g, ""));
-            season.push(subSeason);
         } else if (item.length == 2) {
             var subSeason = new Array;
-            subSeason.push((item[0] + " " + item[1]).replace(/-/g, ""));
+            subSeason.push(item[0] + " " + item[1]);
+            season.push(subSeason);
+        } else if (item.length == 3) {
+            var subSeason = new Array;
+            subSeason.push(item[0] + " " + item[1] + " " + item[2]);
             season.push(subSeason);
         } else {
             var month = item[0].toLowerCase()
