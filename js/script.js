@@ -66,27 +66,43 @@ var makeStats =  function(data) {
     var totalLosses = new Array;
     var blownLeadTeams = [];
     var comebackTeams = [];
+    var keptTeams = [];
     var mostComebacks = 0;
     var mostBlownLeads = 0;
+    var keptLeads = 0;
+    var mostBlownLeadTeams = "";
+    var mostComebackTeams = "";
+    var mostKeptTeams = "";
     for (var result of data){
         if(result.result == "L"){
             totalLosses.push(result)
-            if (blownLeadTeams[result.leadingTeam] == undefined){
-                blownLeadTeams[result.leadingTeam] = 0
-            }
-            blownLeadTeams[result.leadingTeam] += 1;
+            blownLeadTeams[result.leadingTeam] = blownLeadTeams[result.leadingTeam] || 0
+            blownLeadTeams[result.leadingTeam] += 1
             if (blownLeadTeams[result.leadingTeam] > mostBlownLeads){
                 mostBlownLeads = blownLeadTeams[result.leadingTeam];
+                mostBlownLeadTeams = result.leadingTeam
+            } else if (blownLeadTeams[result.leadingTeam] == mostBlownLeads){
+                mostBlownLeadTeams += ", " + result.leadingTeam
             }
-            if (comebackTeams[result.trailingTeam] == undefined){
-                comebackTeams[result.trailingTeam] = 0
-            }
-            comebackTeams[result.trailingTeam] += 1;
+
+            comebackTeams[result.trailingTeam] = comebackTeams[result.trailingTeam] || 0
+            comebackTeams[result.trailingTeam] += 1
             if (comebackTeams[result.trailingTeam] > mostComebacks){
                 mostComebacks = comebackTeams[result.trailingTeam];
+                mostComebackTeams = result.trailingTeam
+            } else if (comebackTeams[result.trailingTeam] == mostComebacks){
+                mostComebackTeams += ", " + result.trailingTeam
             }
         } else {
             totalWins.push(result)
+            keptTeams[result.leadingTeam] = keptTeams[result.leadingTeam] || 0
+            keptTeams[result.leadingTeam] += 1
+            if (keptTeams[result.leadingTeam] > keptLeads){
+                keptLeads = keptTeams[result.leadingTeam];
+                mostKeptTeams = result.leadingTeam
+            } else if (keptLeads == keptTeams[result.leadingTeam]) {
+                mostKeptTeams += ", " + result.leadingTeam
+            }
         }
     }
     var retainedLeads = document.createElement('p')
@@ -99,25 +115,6 @@ var makeStats =  function(data) {
     percentage.innerHTML = "Percentage of blown 3-1 leads: <span class='highlight'>" + Math.round((totalLosses.length/totalWins.length)*10000)/100 + "%</span>";
     content.appendChild(percentage)
     if(mostComebacks != 0) {
-        var mostBlownLeadTeams = "";
-        for(var team in blownLeadTeams){
-            if(blownLeadTeams[team] == mostBlownLeads){
-                if(mostBlownLeadTeams != ""){
-                    mostBlownLeadTeams +=", "
-                }
-                mostBlownLeadTeams += team
-            }
-        }
-        var mostComebackTeams = "";
-        for(var team in comebackTeams){
-            if(comebackTeams[team] == mostComebacks){
-                if(mostComebackTeams != ""){
-                    mostComebackTeams += ", "
-                }
-                mostComebackTeams += team
-            }
-        }
-
         var teamBlownLeads = document.createElement('p')
         teamBlownLeads.innerHTML = "Team(s) with the most blown 3-1 leads: <span class='highlight'>" + mostBlownLeadTeams + " (" + mostBlownLeads + ")</span>";
         content.appendChild(teamBlownLeads)
@@ -125,6 +122,9 @@ var makeStats =  function(data) {
         teamComebacks.innerHTML = "Team(s) with the most 3-1 comebacks: <span class='highlight'>" + mostComebackTeams + " (" + mostComebacks + ")</span>";
         content.appendChild(teamComebacks)
     }
+    var keptLeadsContent = document.createElement('p')
+    keptLeadsContent.innerHTML = "Team(s) with the most wins after a 3-1 lead: <span class='highlight'>" + mostKeptTeams + " (" + keptLeads + ")</span>";
+    content.appendChild(keptLeadsContent)
 }
 
 var parseResponse = function(response) {
