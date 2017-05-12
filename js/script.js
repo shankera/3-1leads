@@ -22,7 +22,7 @@ var createSidebarHeader = function(seasonYear){
     var sidebarItem = document.createElement('li');
     var sidebarItemHeader = document.createElement('a');
     sidebarItemHeader.textContent = seasonYear;
-    sidebarItemHeader.setAttribute('class', 'notlink');
+    sidebarItemHeader.setAttribute('class', 'notlink sidebarHeader');
     sidebarItem.appendChild(sidebarItemHeader)
     return sidebarItem
 }

@@ -222,9 +222,13 @@ a.pinklink:hover {
     color: #FF9E9E;
 }
 
-.nav-sidebar>li>a:hover, .nav-sidebar>li>.notlink:hover {
-    background-color: #FE1313;
+.nav-sidebar>li>a:hover{
+    background-color: #C60000;
     color: #FFFDFD;
+}
+.nav-sidebar>li>.sidebarHeader:hover{
+    background-color: #880000;
+    color: #FF9E9E;
 }
 
 .nav-sidebar>.active-link {
@@ -239,7 +243,6 @@ a.pinklink:hover {
 .highlight {
     color:#FFFDFD;
 }
-
 /* selected link */
 
 a:active {
