@@ -135,15 +135,14 @@ var parseResponse = function(response) {
         if (item[0] == "" || item[0] == undefined) {
         } else if (item.length == 2) {
             var subSeason = new Array;
-            subSeason.push(item[0] + " " + item[1]);
+            subSeason.push(item[0] + " " + toTitleCase(item[1]));
             season.push(subSeason);
         } else if (item.length == 3) {
             var subSeason = new Array;
-            subSeason.push(item[0] + " " + item[1] + " " + item[2]);
+            subSeason.push(item[0] + " " + toTitleCase(item[1]) + " " + toTitleCase(item[2]));
             season.push(subSeason);
         } else {
-            var month = item[0].toLowerCase()
-            month = month[0].toUpperCase() + month.slice(1)
+            var month = toTitleCase(item[0])
             var result = new Result(month + " " + item[1] + " " + item[2],
                 item[3],
                 item[4],
@@ -153,6 +152,10 @@ var parseResponse = function(response) {
         }
     }
     return season;
+}
+var toTitleCase = function(string) {
+    var newString = string.toLowerCase()
+    return newString[0].toUpperCase() + newString.slice(1)
 }
 
 var createTable = function(data) {
