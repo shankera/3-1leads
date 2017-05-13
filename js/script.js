@@ -67,12 +67,24 @@ var makeStats =  function(data) {
     var blownLeadTeams = [];
     var comebackTeams = [];
     var keptTeams = [];
+    var badTeams = [];
+    var commonWScore = [];
+    var commonLScore = [];
+
     var mostComebacks = 0;
     var mostBlownLeads = 0;
     var keptLeads = 0;
+    var mostStillBad = 0;
+    var numberOfWScore = 0;
+    var numberOfLScore = 0;
+
     var mostBlownLeadTeams = "";
     var mostComebackTeams = "";
     var mostKeptTeams = "";
+    var mostBadTeams = "";
+    var mostCommonWScore = "";
+    var mostCommonLScore = "";
+
     for (var result of data){
         if(result.result == "L"){
             totalLosses.push(result)
@@ -93,6 +105,16 @@ var makeStats =  function(data) {
             } else if (comebackTeams[result.trailingTeam] == mostComebacks){
                 mostComebackTeams += ", " + result.trailingTeam
             }
+
+            commonLScore[result.score] = commonLScore[result.score] || 0
+            commonLScore[result.score] += 1
+            if (commonLScore[result.score] > numberOfLScore) {
+                numberOfLScore = commonLScore[result.score];
+                mostCommonLScore = result.score
+            } else if (commonLScore[result.score] == numberOfLScore){
+                mostCommonLScore += ", " + result.score
+            }
+
         } else {
             totalWins.push(result)
             keptTeams[result.leadingTeam] = keptTeams[result.leadingTeam] || 0
@@ -103,10 +125,28 @@ var makeStats =  function(data) {
             } else if (keptLeads == keptTeams[result.leadingTeam]) {
                 mostKeptTeams += ", " + result.leadingTeam
             }
+
+            badTeams[result.trailingTeam] = badTeams[result.trailingTeam]|| 0
+            badTeams[result.trailingTeam] += 1
+            if (badTeams[result.trailingTeam] > mostStillBad) {
+                mostStillBad = badTeams[result.trailingTeam];
+                mostBadTeams = result.trailingTeam
+            } else if (mostStillBad == badTeams[result.trailingTeam]){
+                mostBadTeams += ", " + result.trailingTeam
+            }
+
+            commonWScore[result.score] = commonWScore[result.score] || 0
+            commonWScore[result.score] += 1
+            if (commonWScore[result.score] > numberOfWScore) {
+                numberOfWScore = commonWScore[result.score];
+                mostCommonWScore = result.score
+            } else if (commonWScore[result.score] == numberOfWScore){
+                mostCommonWScore += ", " + result.score
+            }
         }
     }
     var retainedLeads = document.createElement('p')
-    retainedLeads.innerHTML = "Total retained 3-1 leads: <span class='highlight'>" + totalWins.length + "</span>";
+    retainedLeads.innerHTML = "Total wins after having a 3-1 leads: <span class='highlight'>" + totalWins.length + "</span>";
     content.appendChild(retainedLeads)
     var blownLeads = document.createElement('p')
     blownLeads.innerHTML = "Total blown 3-1 leads: <span class='highlight'>" + totalLosses.length + "</span>";
@@ -125,6 +165,17 @@ var makeStats =  function(data) {
     var keptLeadsContent = document.createElement('p')
     keptLeadsContent.innerHTML = "Team(s) with the most wins after a 3-1 lead: <span class='highlight'>" + mostKeptTeams + " (" + keptLeads + ")</span>";
     content.appendChild(keptLeadsContent)
+    var badTeamsContent = document.createElement('p')
+    badTeamsContent.innerHTML = "Team(s) with the most losses after being down 3-1: <span class='highlight'>" + mostBadTeams + " (" + mostStillBad + ")</span>";
+    content.appendChild(badTeamsContent)
+    var keptLeadsScore = document.createElement('p')
+    keptLeadsScore.innerHTML = "Most common score(s) for teams that won after having a 3-1 lead: <span class='highlight'>" + mostCommonWScore + " (" + numberOfWScore + ")</span>";
+    content.appendChild(keptLeadsScore)
+    if(mostComebacks != 0){
+        var comebackScore = document.createElement('p')
+        comebackScore.innerHTML = "Most common score(s) for 3-1 comebacks: <span class='highlight'>" + mostCommonLScore + " (" + numberOfLScore + ")</span>";
+        content.appendChild(comebackScore)
+    }
 }
 
 var parseResponse = function(response) {
