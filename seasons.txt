@@ -14,3 +14,4 @@
 2002-03|Postseason,http://www.3-1leads.com/seasons/2002-03/Postseason.txt
 2001-02|Postseason,http://www.3-1leads.com/seasons/2001-02/Postseason.txt
 2000-01|Postseason,http://www.3-1leads.com/seasons/2000-01/Postseason.txt
+1999-00|Postseason,http://www.3-1leads.com/seasons/1999-00/Postseason.txt
