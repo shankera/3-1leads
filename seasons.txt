@@ -9,3 +9,4 @@
 2008-09|Postseason,http://www.3-1leads.com/seasons/2008-09/Postseason.txt
 2007-08|Postseason,http://www.3-1leads.com/seasons/2007-08/Postseason.txt
 2006-07|Postseason,http://www.3-1leads.com/seasons/2006-07/Postseason.txt
+2005-06|Postseason,http://www.3-1leads.com/seasons/2005-06/Postseason.txt
