@@ -18,3 +18,4 @@
 1998-99|Postseason,http://www.3-1leads.com/seasons/1998-99/Postseason.txt
 1997-98|Postseason,http://www.3-1leads.com/seasons/1997-98/Postseason.txt
 1996-97|Postseason,http://www.3-1leads.com/seasons/1996-97/Postseason.txt
+1995-96|Postseason,http://www.3-1leads.com/seasons/1995-96/Postseason.txt
