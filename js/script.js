@@ -2,6 +2,7 @@ $(document).ready(function() {
     $.ajax({
         url: "http://www.3-1leads.com/seasons.txt",
         success: function(data) {
+            initializeTeamDictionary()
             var rows = data.split('\n');
             for (var season of rows) {
                 if (season == "") return;
@@ -17,6 +18,44 @@ $(document).ready(function() {
         }
     });
 });
+var initializeTeamDictionary = function(){
+    allTeams['ANA'] = 'Anaheim Ducks'
+    allTeams['ARI'] = 'Arizona Coyotes'
+    allTeams['ATL'] = 'Atlanta Thrashers'
+    allTeams['BOS'] = 'Boston Bruins'
+    allTeams['BUF'] = 'Buffalo Sabres'
+    allTeams['CGY'] = 'Calgary Flames'
+    allTeams['CAR'] = 'Carolina Hurricanes'
+    allTeams['CHI'] = 'Chicago Blackhawks'
+    allTeams['CBJ'] = 'Columbus Blue Jackets'
+    allTeams['COL'] = 'Colorado Avalanche'
+    allTeams['DAL'] = 'Dallas Stars'
+    allTeams['DET'] = 'Detroit Red Wings'
+    allTeams['EDM'] = 'Edmonton Oilers'
+    allTeams['FLA'] = 'Florida Panthers'
+    allTeams['HFD'] = 'Hartford Whalers'
+    allTeams['LAK'] = 'Los Angeles Kings'
+    allTeams['MIN'] = 'Minnesota Wild'
+    allTeams['MNS'] = 'Minnesota North Stars'
+    allTeams['MTL'] = 'Montreal Canadiens'
+    allTeams['NSH'] = 'Nashville Predators'
+    allTeams['NJD'] = 'New Jersey Devils'
+    allTeams['NYI'] = 'New York Islanders'
+    allTeams['NYR'] = 'New York Rangers'
+    allTeams['OTT'] = 'Ottowa Senators'
+    allTeams['PHI'] = 'Philadelphia Flyers'
+    allTeams['PHX'] = 'Pheonix Coyotes'
+    allTeams['PIT'] = 'Pittsburgh Penguins'
+    allTeams['QUE'] = 'Quebec Nordiques'
+    allTeams['SJS'] = 'San Jose Sharks'
+    allTeams['STL'] = 'St. Louis Blues'
+    allTeams['TBL'] = 'Tampa Bay Lightning'
+    allTeams['TOR'] = 'Toronto Maple Leafs'
+    allTeams['VAN'] = 'Vancouver Canucks'
+    allTeams['WIN'] = 'Winnipeg Jets'
+    allTeams['WSH'] = 'Washington Capitals'
+    allTeams['WPG'] = 'Winnipeg Jets'
+}
 
 var createSidebarHeader = function(seasonYear){
     var sidebarItem = document.createElement('li');
@@ -217,6 +256,7 @@ var createTable = function(data) {
     td.setAttribute('class', 'highlight');
     var tl = document.createElement('th');
     tl.textContent = "Leading Team";
+    tl.setAttribute('align', 'right');
     tl.setAttribute('class', 'highlight');
     var tr = document.createElement('th');
     tr.textContent = "Result";
@@ -226,6 +266,7 @@ var createTable = function(data) {
     ts.setAttribute('class', 'highlight');
     var tt = document.createElement('th');
     tt.textContent = "Trailing Team";
+    tt.setAttribute('align', 'right');
     tt.setAttribute('class', 'highlight');
     tableHeader.append(td);
     tableHeader.append(tl);
@@ -239,8 +280,9 @@ var createTable = function(data) {
         rd.textContent = result.date;
         rd.setAttribute('align', 'left');
         var rl = document.createElement('td');
-        rl.textContent = result.leadingTeam;
+        rl.textContent = allTeams[result.leadingTeam];
         rl.setAttribute('align', 'right');
+        rl.style.paddingLeft = '50px'
         var rr = document.createElement('td');
         rr.textContent = result.result;
         rr.setAttribute('align', 'right');
@@ -248,7 +290,8 @@ var createTable = function(data) {
         rs.textContent = result.score;
         rs.setAttribute('align', 'right');
         var rt = document.createElement('td');
-        rt.textContent = result.trailingTeam;
+        rt.textContent = allTeams[result.trailingTeam];
+        rt.style.paddingLeft = '50px'
         rt.setAttribute('align', 'right');
         row.append(rd);
         row.append(rl);
@@ -259,7 +302,7 @@ var createTable = function(data) {
     }
     content.appendChild(table)
 }
-
+var allTeams = {};
 function Result(date, leadingTeam, result, score, trailingTeam) {
     this.date = date;
     this.leadingTeam = leadingTeam;
