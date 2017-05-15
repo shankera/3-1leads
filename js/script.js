@@ -152,7 +152,7 @@ var makeStats =  function(data) {
     blownLeads.innerHTML = "Total blown 3-1 leads: <span class='highlight'>" + totalLosses.length + "</span>";
     content.appendChild(blownLeads)
     var percentage = document.createElement('p')
-    percentage.innerHTML = "Percentage of blown 3-1 leads: <span class='highlight'>" + Math.round((totalLosses.length/totalWins.length)*10000)/100 + "%</span>";
+    percentage.innerHTML = "Percentage of blown 3-1 leads: <span class='highlight'>" + Math.round((totalLosses.length/(totalLosses.length+totalWins.length))*10000)/100 + "%</span>";
     content.appendChild(percentage)
     if(mostComebacks != 0) {
         var teamBlownLeads = document.createElement('p')
