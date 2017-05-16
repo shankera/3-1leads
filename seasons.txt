@@ -26,3 +26,4 @@
 1990-91|Postseason,http://www.3-1leads.com/seasons/1990-91/Postseason.txt
 1989-90|Postseason,http://www.3-1leads.com/seasons/1989-90/Postseason.txt
 1988-89|Postseason,http://www.3-1leads.com/seasons/1988-89/Postseason.txt
+1987-88|Postseason,http://www.3-1leads.com/seasons/1987-88/Postseason.txt

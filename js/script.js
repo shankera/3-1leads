@@ -253,20 +253,25 @@ var createTable = function(data) {
     var tableHeader = document.createElement('tr');
     var td = document.createElement('th');
     td.textContent = "Date";
+    td.setAttribute('align', 'right');
     td.setAttribute('class', 'highlight');
     var tl = document.createElement('th');
     tl.textContent = "Leading Team";
     tl.setAttribute('align', 'right');
+    tl.style.paddingLeft = '50px'
     tl.setAttribute('class', 'highlight');
     var tr = document.createElement('th');
     tr.textContent = "Result";
+    tr.setAttribute('align', 'right');
     tr.setAttribute('class', 'highlight');
     var ts = document.createElement('th');
     ts.textContent = "Score";
+    ts.setAttribute('align', 'right');
     ts.setAttribute('class', 'highlight');
     var tt = document.createElement('th');
     tt.textContent = "Trailing Team";
     tt.setAttribute('align', 'right');
+    tt.style.paddingLeft = '50px'
     tt.setAttribute('class', 'highlight');
     tableHeader.append(td);
     tableHeader.append(tl);
@@ -282,7 +287,7 @@ var createTable = function(data) {
         var rl = document.createElement('td');
         rl.textContent = allTeams[result.leadingTeam];
         rl.setAttribute('align', 'right');
-        rl.style.paddingLeft = '50px'
+        rl.style.paddingLeft = '30px'
         var rr = document.createElement('td');
         rr.textContent = result.result;
         rr.setAttribute('align', 'right');
@@ -291,7 +296,7 @@ var createTable = function(data) {
         rs.setAttribute('align', 'right');
         var rt = document.createElement('td');
         rt.textContent = allTeams[result.trailingTeam];
-        rt.style.paddingLeft = '50px'
+        rt.style.paddingLeft = '30px'
         rt.setAttribute('align', 'right');
         row.append(rd);
         row.append(rl);
