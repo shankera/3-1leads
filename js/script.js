@@ -37,6 +37,7 @@ var initializeTeamDictionary = function(){
     allTeams['LAK'] = 'Los Angeles Kings'
     allTeams['MIN'] = 'Minnesota Wild'
     allTeams['MNS'] = 'Minnesota North Stars'
+    allTeams['MMR'] = 'Montreal Maroons'
     allTeams['MTL'] = 'Montreal Canadiens'
     allTeams['NSH'] = 'Nashville Predators'
     allTeams['NJD'] = 'New Jersey Devils'
@@ -46,6 +47,7 @@ var initializeTeamDictionary = function(){
     allTeams['PHI'] = 'Philadelphia Flyers'
     allTeams['PHX'] = 'Pheonix Coyotes'
     allTeams['PIT'] = 'Pittsburgh Penguins'
+    allTeams['PIR'] = 'Pittsburgh Pirates'
     allTeams['QUE'] = 'Quebec Nordiques'
     allTeams['SEN'] = 'Ottowa Senators (1917)'
     allTeams['SJS'] = 'San Jose Sharks'
@@ -233,10 +235,19 @@ var makeStats =  function(data) {
     var blownLeads = document.createElement('p')
     blownLeads.innerHTML = "Total blown 3-1 leads: <span class='highlight'>" + totalLosses.length + "</span>";
     content.appendChild(blownLeads)
-    
+    if(totalTies.length != 0){
+        var tiedLeads = document.createElement('p')
+        tiedLeads.innerHTML = "Total tied up 3-1 leads: <span class='highlight'>" + totalTies.length + "</span>";
+        content.appendChild(tiedLeads)
+    }
     var percentage = document.createElement('p')
     percentage.innerHTML = "Percentage of blown 3-1 leads: <span class='highlight'>" + Math.round((totalLosses.length/(totalLosses.length+totalWins.length))*10000)/100 + "%</span>";
     content.appendChild(percentage)
+    if(totalTies.length != 0){
+        var tiedPercentage = document.createElement('p')
+        tiedPercentage.innerHTML = "Percentage of blown 3-1 leads including ties: <span class='highlight'>" + Math.round(((totalLosses.length+totalTies.length)/(totalLosses.length+totalWins.length+totalTies.length))*10000)/100 + "%</span>";
+        content.appendChild(tiedPercentage)
+    }
     if(mostComebacks != 0) {
         var teamBlownLeads = document.createElement('p')
         teamBlownLeads.innerHTML = "Team(s) with the most blown 3-1 leads: <span class='highlight'>" + mostBlownLeadTeams + " (" + mostBlownLeads + ")</span>";
@@ -251,6 +262,16 @@ var makeStats =  function(data) {
     var badTeamsContent = document.createElement('p')
     badTeamsContent.innerHTML = "Team(s) with the most losses after being down 3-1: <span class='highlight'>" + mostBadTeams + " (" + mostStillBad + ")</span>";
     content.appendChild(badTeamsContent)
+
+    if(totalTies.length != 0){
+        var blownTieContent = document.createElement('p')
+        blownTieContent.innerHTML = "Team(s) with the most blown 3-1 leads resulting in a tie: <span class='highlight'>" + mostBlownTieTeams + " (" + mostBlownTies + ")</span>";
+        content.appendChild(blownTieContent)
+        var comebackTieContent = document.createElement('p')
+        comebackTieContent.innerHTML = "Team(s) with the most comebacks from a 3-1 lead resulting in a tie: <span class='highlight'>" + mostComebackTieTeams + " (" + mostComebackTies + ")</span>";
+        content.appendChild(comebackTieContent)
+    }
+
     var keptLeadsScore = document.createElement('p')
     keptLeadsScore.innerHTML = "Most common score(s) for teams that won after having a 3-1 lead: <span class='highlight'>" + mostCommonWScore + " (" + numberOfWScore + ")</span>";
     content.appendChild(keptLeadsScore)
@@ -258,6 +279,11 @@ var makeStats =  function(data) {
         var comebackScore = document.createElement('p')
         comebackScore.innerHTML = "Most common score(s) for 3-1 comebacks: <span class='highlight'>" + mostCommonLScore + " (" + numberOfLScore + ")</span>";
         content.appendChild(comebackScore)
+    }
+    if(totalTies.length != 0){
+        var tiedScore = document.createElement('p')
+        tiedScore.innerHTML = "Most common score(s) for 3-1 leads ending in a tie: <span class='highlight'>" + mostCommonTScore + " (" + numberOfTScore + ")</span>";
+        content.appendChild(tiedScore)
     }
 }
 
