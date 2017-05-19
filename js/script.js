@@ -54,6 +54,7 @@ var initializeTeamDictionary = function(){
     allTeams['TBL'] = 'Tampa Bay Lightning'
     allTeams['TAN'] = 'Toronto Arenas'
     allTeams['TOR'] = 'Toronto Maple Leafs'
+    allTeams['TSP'] = 'Toronto St. Pats'
     allTeams['VAN'] = 'Vancouver Canucks'
     allTeams['VMI'] = 'Vancouver Millionaires'
     allTeams['WIN'] = 'Winnipeg Jets (1979)'
@@ -107,26 +108,36 @@ var loadTable = function(value) {
 var makeStats =  function(data) {
     var totalWins = new Array;
     var totalLosses = new Array;
+    var totalTies = new Array;
     var blownLeadTeams = [];
     var comebackTeams = [];
     var keptTeams = [];
     var badTeams = [];
+    var blownTieTeams = [];
+    var comebackTieTeams = [];
     var commonWScore = [];
     var commonLScore = [];
+    var commonTScore = [];
 
     var mostComebacks = 0;
     var mostBlownLeads = 0;
+    var mostBlownTies = 0;
+    var mostComebackTies = 0;
     var keptLeads = 0;
     var mostStillBad = 0;
     var numberOfWScore = 0;
     var numberOfLScore = 0;
+    var numberOfTScore = 0;
 
     var mostBlownLeadTeams = "";
     var mostComebackTeams = "";
     var mostKeptTeams = "";
     var mostBadTeams = "";
+    var mostBlownTieTeams = "";
+    var mostComebackTieTeams = "";
     var mostCommonWScore = "";
     var mostCommonLScore = "";
+    var mostCommonTScore = "";
 
     for (var result of data){
         if(result.result == "L"){
@@ -158,7 +169,7 @@ var makeStats =  function(data) {
                 mostCommonLScore += ", " + result.score
             }
 
-        } else {
+        } else if (result.result == "W") {
             totalWins.push(result)
             keptTeams[result.leadingTeam] = keptTeams[result.leadingTeam] || 0
             keptTeams[result.leadingTeam] += 1
@@ -186,6 +197,34 @@ var makeStats =  function(data) {
             } else if (commonWScore[result.score] == numberOfWScore){
                 mostCommonWScore += ", " + result.score
             }
+        } else if (result.result == "T"){
+            totalTies.push(result)
+            blownTieTeams[result.leadingTeam] = blownTieTeams[result.leadingTeam] || 0
+            blownTieTeams[result.leadingTeam] += 1
+            if (blownTieTeams[result.leadingTeam] > mostBlownTies){
+                mostBlownTies = blownTieTeams[result.leadingTeam];
+                mostBlownTieTeams = result.leadingTeam
+            } else if (mostBlownTies == blownTieTeams[result.leadingTeam]) {
+                mostBlownTieTeams += ", " + result.leadingTeam
+            }
+
+            comebackTieTeams[result.leadingTeam] = comebackTieTeams[result.leadingTeam] || 0
+            comebackTieTeams[result.leadingTeam] += 1
+            if (comebackTieTeams[result.leadingTeam] > mostComebackTies){
+                mostComebackTies = comebackTieTeams[result.leadingTeam];
+                mostComebackTieTeams = result.leadingTeam
+            } else if (mostComebackTies == comebackTieTeams[result.leadingTeam]) {
+                mostComebackTieTeams += ", " + result.leadingTeam
+            }
+
+            commonTScore[result.score] = commonTScore[result.score] || 0
+            commonTScore[result.score] += 1
+            if (commonTScore[result.score] > numberOfTScore) {
+                numberOfTScore = commonTScore[result.score];
+                mostCommonTScore = result.score
+            } else if (commonTScore[result.score] == numberOfTScore){
+                mostCommonTScore += ", " + result.score
+            }
         }
     }
     var retainedLeads = document.createElement('p')
@@ -194,6 +233,7 @@ var makeStats =  function(data) {
     var blownLeads = document.createElement('p')
     blownLeads.innerHTML = "Total blown 3-1 leads: <span class='highlight'>" + totalLosses.length + "</span>";
     content.appendChild(blownLeads)
+    
     var percentage = document.createElement('p')
     percentage.innerHTML = "Percentage of blown 3-1 leads: <span class='highlight'>" + Math.round((totalLosses.length/(totalLosses.length+totalWins.length))*10000)/100 + "%</span>";
     content.appendChild(percentage)
