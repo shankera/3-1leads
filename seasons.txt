@@ -29,4 +29,5 @@
 1987-88|Postseason,http://www.3-1leads.com/seasons/1987-88/Postseason.txt
 1986-87|Postseason,http://www.3-1leads.com/seasons/1986-87/Postseason.txt
 1985-86|Postseason,http://www.3-1leads.com/seasons/1985-86/Postseason.txt
+1918-19|Postseason,http://www.3-1leads.com/seasons/1918-19/Postseason.txt
 1917-18|Postseason,http://www.3-1leads.com/seasons/1917-18/Postseason.txt
