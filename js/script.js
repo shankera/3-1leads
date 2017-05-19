@@ -210,13 +210,13 @@ var makeStats =  function(data) {
                 mostBlownTieTeams += ", " + result.leadingTeam
             }
 
-            comebackTieTeams[result.leadingTeam] = comebackTieTeams[result.leadingTeam] || 0
-            comebackTieTeams[result.leadingTeam] += 1
-            if (comebackTieTeams[result.leadingTeam] > mostComebackTies){
-                mostComebackTies = comebackTieTeams[result.leadingTeam];
-                mostComebackTieTeams = result.leadingTeam
-            } else if (mostComebackTies == comebackTieTeams[result.leadingTeam]) {
-                mostComebackTieTeams += ", " + result.leadingTeam
+            comebackTieTeams[result.trailingTeam] = comebackTieTeams[result.trailingTeam] || 0
+            comebackTieTeams[result.trailingTeam] += 1
+            if (comebackTieTeams[result.trailingTeam] > mostComebackTies){
+                mostComebackTies = comebackTieTeams[result.trailingTeam];
+                mostComebackTieTeams = result.trailingTeam
+            } else if (mostComebackTies == comebackTieTeams[result.trailingTeam]) {
+                mostComebackTieTeams += ", " + result.trailingTeam
             }
 
             commonTScore[result.score] = commonTScore[result.score] || 0
