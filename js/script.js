@@ -30,6 +30,7 @@ var initializeTeamDictionary = function(){
     allTeams['CBJ'] = 'Columbus Blue Jackets'
     allTeams['COL'] = 'Colorado Avalanche'
     allTeams['DAL'] = 'Dallas Stars'
+    allTeams['DCG'] = 'Detroit Cougars'
     allTeams['DET'] = 'Detroit Red Wings'
     allTeams['EDM'] = 'Edmonton Oilers'
     allTeams['FLA'] = 'Florida Panthers'
