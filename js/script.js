@@ -45,6 +45,7 @@ var initializeTeamDictionary = function(){
     allTeams['NYA'] = 'New York Americans'
     allTeams['NYI'] = 'New York Islanders'
     allTeams['NYR'] = 'New York Rangers'
+    allTeams['OAK'] = 'Oakland Seals'
     allTeams['OTT'] = 'Ottowa Senators'
     allTeams['PHI'] = 'Philadelphia Flyers'
     allTeams['PHX'] = 'Pheonix Coyotes'
