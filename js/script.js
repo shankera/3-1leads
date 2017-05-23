@@ -326,6 +326,7 @@ var toTitleCase = function(string) {
 var createTable = function(data) {
     var table = document.createElement('table');
     var tableHeader = document.createElement('tr');
+    tableHeader.setAttribute('bgcolor', '#6A1313')
     var td = document.createElement('th');
     td.textContent = "Date";
     td.setAttribute('align', 'right');
@@ -333,7 +334,7 @@ var createTable = function(data) {
     var tl = document.createElement('th');
     tl.textContent = "Leading Team";
     tl.setAttribute('align', 'right');
-    tl.style.paddingLeft = '50px'
+    tl.style.paddingLeft = '25px'
     tl.setAttribute('class', 'highlight');
     var tr = document.createElement('th');
     tr.textContent = "Result";
@@ -346,7 +347,7 @@ var createTable = function(data) {
     var tt = document.createElement('th');
     tt.textContent = "Trailing Team";
     tt.setAttribute('align', 'right');
-    tt.style.paddingLeft = '50px'
+    tt.style.paddingLeft = '25px'
     tt.setAttribute('class', 'highlight');
     tableHeader.append(td);
     tableHeader.append(tl);
@@ -354,24 +355,27 @@ var createTable = function(data) {
     tableHeader.append(ts);
     tableHeader.append(tt);
     table.appendChild(tableHeader);
+    var index = 0;
     for (result of data) {
         var row = document.createElement('tr');
+        if(++index%2 == 0 ){
+            row.setAttribute('bgcolor', '#6A1313')
+        }
         var rd = document.createElement('td');
         rd.textContent = result.date;
         rd.setAttribute('align', 'left');
         var rl = document.createElement('td');
         rl.textContent = allTeams[result.leadingTeam];
         rl.setAttribute('align', 'right');
-        rl.style.paddingLeft = '30px'
+        rl.style.paddingLeft = '15px'
         var rr = document.createElement('td');
         rr.textContent = result.result;
-        rr.setAttribute('align', 'right');
+        rr.setAttribute('align', 'center');
         var rs = document.createElement('td');
         rs.textContent = result.score;
-        rs.setAttribute('align', 'right');
+        rs.setAttribute('align', 'center');
         var rt = document.createElement('td');
         rt.textContent = allTeams[result.trailingTeam];
-        rt.style.paddingLeft = '30px'
         rt.setAttribute('align', 'right');
         row.append(rd);
         row.append(rl);
