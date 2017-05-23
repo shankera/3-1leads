@@ -28,6 +28,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div id="inner" class="menu-toggle">
                 <div id="sidebar" class="menu-toggle">
                     <ul id="sidebarList" class="nav nav-sidebar">
+                        <li><a href="./index.html" class="notlink sidebarItem">Home</a></li>
                     </ul>
                 </div>
             </div>
@@ -35,6 +36,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h1><a href="http://www.3-1leads.com">3-1Leads.com</a></h1>
         <div id="content" class="page-content  body-fillcanvas">
             <p>In hockey, a 3-1 lead is commonly regarded as the worst lead to have in a game or series. This extends to other sports like <a class="pinklink" href="http://www.nba.com/playoffs/2016/finals/">basketball</a> or <a class="pinklink" href="http://m.mlb.com/news/article/207938228/chicago-cubs-win-2016-world-series/">baseball</a>, and some even reference the <a class="pinklink" href="http://biblehub.com/job/3-1.htm">bible</a>. I was curious what the actual statistics were like for hockey, so I put this together to try and aggregate that data.</p>
+            <h3>Incomplete Data</h3>
+            <p>I have not found enough information for the following games in order to correctly add them to their season, since they may or may not have had 3-1 leads in the games.</p>
+            <script>
+            $.get('http://www.3-1leads.com/unknowns.txt')
+            .done(function(response) {
+                createTable(parseResponse(response)[0])
+            })</script>
         </div>
     </div>
     <footer class="site-footer">

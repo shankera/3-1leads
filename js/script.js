@@ -1,8 +1,8 @@
 $(document).ready(function() {
+    initializeTeamDictionary()
     $.ajax({
         url: "http://www.3-1leads.com/seasons.txt",
         success: function(data) {
-            initializeTeamDictionary()
             var rows = data.split('\n');
             for (var season of rows) {
                 if (season == "") return;
@@ -64,6 +64,7 @@ var initializeTeamDictionary = function(){
     allTeams['TSP'] = 'Toronto St. Pats'
     allTeams['VAN'] = 'Vancouver Canucks'
     allTeams['VMI'] = 'Vancouver Millionaires'
+    allTeams['VIC'] = 'Victoria Cougars'
     allTeams['WIN'] = 'Winnipeg Jets (1979)'
     allTeams['WSH'] = 'Washington Capitals'
     allTeams['WPG'] = 'Winnipeg Jets'
