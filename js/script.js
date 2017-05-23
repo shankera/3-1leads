@@ -19,6 +19,7 @@ $(document).ready(function() {
     });
 });
 var initializeTeamDictionary = function(){
+    allTeams['AFM'] = 'Atlanta Flames'
     allTeams['ANA'] = 'Anaheim Ducks'
     allTeams['ARI'] = 'Arizona Coyotes'
     allTeams['ATL'] = 'Atlanta Thrashers'
