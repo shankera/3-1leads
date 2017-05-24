@@ -105,7 +105,6 @@ var loadTable = function(value) {
             header.textContent = part[0]
             header.setAttribute('class', 'highlight')
             content.appendChild(header)
-            part.shift()
             makeStats(part)
             createTable(part)
         }
@@ -324,6 +323,7 @@ var toTitleCase = function(string) {
 }
 
 var createTable = function(data) {
+    data.shift()
     var table = document.createElement('table');
     var tableHeader = document.createElement('tr');
     tableHeader.setAttribute('bgcolor', '#6A1313')
