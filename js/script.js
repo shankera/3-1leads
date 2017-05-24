@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    initializeTeamDictionary()
     $.ajax({
         url: "http://www.3-1leads.com/seasons.txt",
         success: function(data) {
@@ -18,57 +17,57 @@ $(document).ready(function() {
         }
     });
 });
-var initializeTeamDictionary = function(){
-    allTeams['AFM'] = 'Atlanta Flames'
-    allTeams['ANA'] = 'Anaheim Ducks'
-    allTeams['ARI'] = 'Arizona Coyotes'
-    allTeams['ATL'] = 'Atlanta Thrashers'
-    allTeams['BOS'] = 'Boston Bruins'
-    allTeams['BUF'] = 'Buffalo Sabres'
-    allTeams['CGY'] = 'Calgary Flames'
-    allTeams['CAR'] = 'Carolina Hurricanes'
-    allTeams['CHI'] = 'Chicago Blackhawks'
-    allTeams['CBJ'] = 'Columbus Blue Jackets'
-    allTeams['COL'] = 'Colorado Avalanche'
-    allTeams['CLR'] = 'Colorado Rockies'
-    allTeams['DAL'] = 'Dallas Stars'
-    allTeams['DCG'] = 'Detroit Cougars'
-    allTeams['DET'] = 'Detroit Red Wings'
-    allTeams['EDM'] = 'Edmonton Oilers'
-    allTeams['FLA'] = 'Florida Panthers'
-    allTeams['HFD'] = 'Hartford Whalers'
-    allTeams['LAK'] = 'Los Angeles Kings'
-    allTeams['MIN'] = 'Minnesota Wild'
-    allTeams['MNS'] = 'Minnesota North Stars'
-    allTeams['MMR'] = 'Montreal Maroons'
-    allTeams['MTL'] = 'Montreal Canadiens'
-    allTeams['NSH'] = 'Nashville Predators'
-    allTeams['NJD'] = 'New Jersey Devils'
-    allTeams['NYA'] = 'New York Americans'
-    allTeams['NYI'] = 'New York Islanders'
-    allTeams['NYR'] = 'New York Rangers'
-    allTeams['OAK'] = 'Oakland Seals'
-    allTeams['OTT'] = 'Ottowa Senators'
-    allTeams['PHI'] = 'Philadelphia Flyers'
-    allTeams['PHX'] = 'Pheonix Coyotes'
-    allTeams['PIT'] = 'Pittsburgh Penguins'
-    allTeams['PIR'] = 'Pittsburgh Pirates'
-    allTeams['QUE'] = 'Quebec Nordiques'
-    allTeams['SEN'] = 'Ottowa Senators (1917)'
-    allTeams['SJS'] = 'San Jose Sharks'
-    allTeams['SEA'] = 'Seattle Metropolitans'
-    allTeams['STL'] = 'St. Louis Blues'
-    allTeams['TBL'] = 'Tampa Bay Lightning'
-    allTeams['TAN'] = 'Toronto Arenas'
-    allTeams['TOR'] = 'Toronto Maple Leafs'
-    allTeams['TSP'] = 'Toronto St. Pats'
-    allTeams['VAN'] = 'Vancouver Canucks'
-    allTeams['VMI'] = 'Vancouver Millionaires'
-    allTeams['VIC'] = 'Victoria Cougars'
-    allTeams['WIN'] = 'Winnipeg Jets (1979)'
-    allTeams['WSH'] = 'Washington Capitals'
-    allTeams['WPG'] = 'Winnipeg Jets'
-}
+var allTeams = {
+    ['AFM'] : 'Atlanta Flames',
+    ['ANA'] : 'Anaheim Ducks',
+    ['ARI'] : 'Arizona Coyotes',
+    ['ATL'] : 'Atlanta Thrashers',
+    ['BOS'] : 'Boston Bruins',
+    ['BUF'] : 'Buffalo Sabres',
+    ['CGY'] : 'Calgary Flames',
+    ['CAR'] : 'Carolina Hurricanes',
+    ['CHI'] : 'Chicago Blackhawks',
+    ['CBJ'] : 'Columbus Blue Jackets',
+    ['COL'] : 'Colorado Avalanche',
+    ['CLR'] : 'Colorado Rockies',
+    ['DAL'] : 'Dallas Stars',
+    ['DCG'] : 'Detroit Cougars',
+    ['DET'] : 'Detroit Red Wings',
+    ['EDM'] : 'Edmonton Oilers',
+    ['FLA'] : 'Florida Panthers',
+    ['HFD'] : 'Hartford Whalers',
+    ['LAK'] : 'Los Angeles Kings',
+    ['MIN'] : 'Minnesota Wild',
+    ['MNS'] : 'Minnesota North Stars',
+    ['MMR'] : 'Montreal Maroons',
+    ['MTL'] : 'Montreal Canadiens',
+    ['NSH'] : 'Nashville Predators',
+    ['NJD'] : 'New Jersey Devils',
+    ['NYA'] : 'New York Americans',
+    ['NYI'] : 'New York Islanders',
+    ['NYR'] : 'New York Rangers',
+    ['OAK'] : 'Oakland Seals',
+    ['OTT'] : 'Ottowa Senators',
+    ['SEN'] : 'Ottowa Senators (1917)',
+    ['PHI'] : 'Philadelphia Flyers',
+    ['PHX'] : 'Pheonix Coyotes',
+    ['PIT'] : 'Pittsburgh Penguins',
+    ['PIR'] : 'Pittsburgh Pirates',
+    ['QUE'] : 'Quebec Nordiques',
+    ['SJS'] : 'San Jose Sharks',
+    ['SEA'] : 'Seattle Metropolitans',
+    ['STL'] : 'St. Louis Blues',
+    ['TBL'] : 'Tampa Bay Lightning',
+    ['TAN'] : 'Toronto Arenas',
+    ['TOR'] : 'Toronto Maple Leafs',
+    ['TSP'] : 'Toronto St. Pats',
+    ['VAN'] : 'Vancouver Canucks',
+    ['VMI'] : 'Vancouver Millionaires',
+    ['VIC'] : 'Victoria Cougars',
+    ['WIN'] : 'Winnipeg Jets (1979)',
+    ['WPG'] : 'Winnipeg Jets',
+    ['WSH'] : 'Washington Capitals'
+};
 
 var createSidebarHeader = function(seasonYear){
     var sidebarItem = document.createElement('li');
@@ -310,10 +309,10 @@ var parseResponse = function(response) {
         } else {
             var month = toTitleCase(item[0])
             var result = new Result(month + " " + item[1] + " " + item[2],
-                item[3],
-                item[4],
-                item[5],
-                item[6]);
+            item[3],
+            item[4],
+            item[5],
+            item[6]);
             season[season.length - 1].push(result);
         }
     }
@@ -387,7 +386,6 @@ var createTable = function(data) {
     }
     content.appendChild(table)
 }
-var allTeams = {};
 function Result(date, leadingTeam, result, score, trailingTeam) {
     this.date = date;
     this.leadingTeam = leadingTeam;
