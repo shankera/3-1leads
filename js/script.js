@@ -99,15 +99,13 @@ var loadTable = function(value) {
     $.get(value)
     .done(function(response) {
         content.innerHTML = "";
-        var season = parseResponse(response)
-        for (var part of season) {
-            var header = document.createElement('h3');
-            header.textContent = part[0]
-            header.setAttribute('class', 'highlight')
-            content.appendChild(header)
-            makeStats(part)
-            createTable(part)
-        }
+        var part = parseResponse(response)
+        var header = document.createElement('h3');
+        header.textContent = part[0]
+        header.setAttribute('class', 'highlight')
+        content.appendChild(header)
+        makeStats(part)
+        createTable(part)
     })
 };
 
@@ -298,13 +296,9 @@ var parseResponse = function(response) {
         item = item.split(" ")
         if (item[0] == "" || item[0] == undefined) {
         } else if (item.length == 2) {
-            var subSeason = new Array;
-            subSeason.push(item[0] + " " + toTitleCase(item[1]));
-            season.push(subSeason);
+            season.push(item[0] + " " + toTitleCase(item[1]));
         } else if (item.length == 3) {
-            var subSeason = new Array;
-            subSeason.push(item[0] + " " + toTitleCase(item[1]) + " " + toTitleCase(item[2]));
-            season.push(subSeason);
+            season.push(item[0] + " " + toTitleCase(item[1]) + " " + toTitleCase(item[2]));
         } else {
             var month = toTitleCase(item[0])
             var result = new Result(month + " " + item[1] + " " + item[2],
@@ -312,7 +306,7 @@ var parseResponse = function(response) {
             item[4],
             item[5],
             item[6]);
-            season[season.length - 1].push(result);
+            season.push(result);
         }
     }
     return season;
