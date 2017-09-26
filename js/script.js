@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $.ajax({
-        url: "http://www.3-1leads.com/SeasonDirectory.txt",
+        url: "../SeasonDirectory.txt",
         success: function(data) {
             var rows = data.split('\n');
             for (var season of rows) {
@@ -76,8 +76,7 @@ console.log(page)
     console.log(page)
     var parts = page.split("_");
     var dataToLoad = ""+parts[0]+"/"+parts[1]+".txt";
-    console.log("http:\/\/www.3-1leads.com\/seasons\/"+dataToLoad)
-    loadTable("http:\/\/www.3-1leads.com\/seasons\/"+dataToLoad)
+    loadTable("..\/seasons\/"+dataToLoad)
 }
 
  $(window).on('hashchange', hashChange);
@@ -95,12 +94,11 @@ var createSidebarItems = function(seasonYear, seasonData) {
     var sidebarItemContent = document.createElement('div');
     var childList = document.createElement('ul');
     childList.setAttribute('class', 'nav nav-sidebar');
-    for (var dataSource of seasonData) {
-        var dataParts = dataSource.split(',');
+    for (var seasonPart of seasonData) {
         var childListItem = document.createElement('li');
         var childListLink = document.createElement('a');
-        childListLink.textContent = dataParts[0];
-        childListLink.setAttribute('href', '#'+seasonYear+'_'+dataParts[0].replace(' ', ''));
+        childListLink.textContent = seasonPart;
+        childListLink.setAttribute('href', '#'+seasonYear+'_'+seasonPart.replace(' ', ''));
         childListItem.appendChild(childListLink);
         childList.appendChild(childListItem);
     }
