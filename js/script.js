@@ -4,12 +4,12 @@ $(document).ready(function() {
         success: function(data) {
             var rows = data.split('\n');
             for (var season of rows) {
-                if (season == "") return;
+                if (season == "") return hashChange();
                 var seasonData = season.split('|');
                 var seasonYear = seasonData[0]
                 seasonData.shift()
                 var sidebarItemHeader = createSidebarHeader(seasonYear);
-                var sidebarItemContent = createSidebarItems(seasonData);
+                var sidebarItemContent = createSidebarItems(seasonYear, seasonData);
                 var sidebarList = document.getElementById("sidebarList");
                 sidebarList.appendChild(sidebarItemHeader);
                 sidebarList.appendChild(sidebarItemContent);
@@ -70,6 +70,18 @@ var allTeams = {
     ['WSH'] : 'Washington Capitals'
 };
 
+hashChange = function(){
+console.log(page)
+    var page = window.location.hash.replace('#', '');
+    console.log(page)
+    var parts = page.split("_");
+    var dataToLoad = ""+parts[0]+"/"+parts[1]+".txt";
+    console.log("http:\/\/www.3-1leads.com\/seasons\/"+dataToLoad)
+    loadTable("http:\/\/www.3-1leads.com\/seasons\/"+dataToLoad)
+}
+
+ $(window).on('hashchange', hashChange);
+
 var createSidebarHeader = function(seasonYear){
     var sidebarItem = document.createElement('li');
     var sidebarItemHeader = document.createElement('a');
@@ -79,7 +91,7 @@ var createSidebarHeader = function(seasonYear){
     return sidebarItem
 }
 
-var createSidebarItems = function(seasonData) {
+var createSidebarItems = function(seasonYear, seasonData) {
     var sidebarItemContent = document.createElement('div');
     var childList = document.createElement('ul');
     childList.setAttribute('class', 'nav nav-sidebar');
@@ -88,7 +100,7 @@ var createSidebarItems = function(seasonData) {
         var childListItem = document.createElement('li');
         var childListLink = document.createElement('a');
         childListLink.textContent = dataParts[0];
-        childListLink.setAttribute('onClick', 'loadTable(\"' + dataParts[1] + '\")');
+        childListLink.setAttribute('href', '#'+seasonYear+'_'+dataParts[0].replace(' ', ''));
         childListItem.appendChild(childListLink);
         childList.appendChild(childListItem);
     }
