@@ -71,9 +71,7 @@ var allTeams = {
 };
 
 hashChange = function(){
-console.log(page)
     var page = window.location.hash.replace('#', '');
-    console.log(page)
     var parts = page.split("_");
     var dataToLoad = ""+parts[0]+"/"+parts[1]+".txt";
     loadTable("..\/seasons\/"+dataToLoad)
