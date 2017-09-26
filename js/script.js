@@ -62,6 +62,7 @@ var allTeams = {
     ['TOR'] : 'Toronto Maple Leafs',
     ['TSP'] : 'Toronto St. Pats',
     ['VAN'] : 'Vancouver Canucks',
+    ['VGK'] : 'Vegas Golden Knights'
     ['VMI'] : 'Vancouver Millionaires',
     ['VIC'] : 'Victoria Cougars',
     ['WIN'] : 'Winnipeg Jets (1979)',
